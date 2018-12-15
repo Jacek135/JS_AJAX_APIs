@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AJAX APIs</title>
+</head>
+<body>
+    <h1>AJAX Information API Application</h1>
+    <input type="button" id="search" value="search">
+    <div id="output"></div>
+
+<script>
+    window.onload = function(){
+        document.getElementById('search').addEventListener('click', showResults);
+    };
+
+    function showResults(){
+        console.log('Clicked');
+    }
+</script>
+</body>
+</html>
