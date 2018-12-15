@@ -5,18 +5,34 @@
     <title>AJAX APIs</title>
 </head>
 <body>
-    <h1>AJAX Information API Application</h1>
-    <input type="button" id="search" value="search">
-    <div id="output"></div>
+<h1>AJAX Information API Application</h1>
+<input type="button" id="search" value="search">
+<div id="output"></div>
 
 <script>
-    window.onload = function(){
+    window.onload = function () {
         document.getElementById('search').addEventListener('click', showResults);
     };
 
-    function showResults(){
-        console.log('Clicked');
+    function showResults() {
+        var url = "https://randomuser.me/api";
+        ajaxJS(url, function (response) {
+            console.log(response);
+        })
     }
+
+    function ajaxJS(url, callback) {
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                callback(JSON.parse(xhr.responseText));
+            }
+        };
+        xhr.open('GET', url, true);
+        xhr.send()
+    }
+
+
 </script>
 </body>
 </html>
