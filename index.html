@@ -3,6 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>AJAX APIs</title>
+    <style>
+        .dataOutput {
+            padding: 10px;
+            border: 1px solid #eee;
+        }
+    </style>
 </head>
 <body>
 <h1>AJAX Information API Application</h1>
@@ -19,8 +25,14 @@
         var searchTerm = document.querySelector("input[name='searchTerm']").value;
         var url = "https://www.mediawiki.org/w/api.php?" +
             "format=json&action=opensearch&origin=*&search="+searchTerm;
+        var output = document.querySelector("#output");
+        output.innerHTML = "<h2>Search Term " + searchTerm + "</h2>";
         ajaxJS(url, function (response) {
-            console.log(response);
+
+            for(var x in response) {
+                var holder = typeof response[x] == 'string' ? response[x] : response[x][0];
+                output.innerHTML += '<div class="dataOutput">' + holder + '</div>';
+            }
         })
     }
 
