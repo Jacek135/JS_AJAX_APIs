@@ -27,16 +27,24 @@
             "format=json&action=opensearch&origin=*&search="+searchTerm;
         var output = document.querySelector("#output");
         output.innerHTML = "<h2>Search Term " + searchTerm + "</h2>";
-        ajaxJS(url, function (response) {
+        /*ajaxJS(url, function (response) {
 
             for(var x in response) {
                 var holder = typeof response[x] == 'string' ? response[x] : response[x][0];
                 output.innerHTML += '<div class="dataOutput">' + holder + '</div>';
             }
-        })
-        // AIzaSyD4kC2GdSj3zFCU6TnmrmN1escVWhrtg2Y
-        // https://www.googleapis.com/youtube/v3/search/?part=snippet&key=AIzaSyD4kC2GdSj3zFCU6TnmrmN1escVWhrtg2Y&q=test&maxResults=10
+        });*/
+        var url1 = 'https://www.googleapis.com/youtube/v3/search/?part=snippet&key=AIzaSyD4kC2GdSj3zFCU6TnmrmN1escVWhrtg2Y&q=test&maxResults=10';
+        ajaxJS(url1, function(data){
+            for (var x in data.items) {
+                console.log(data.items[x]);
+                var title = data.items[x].snippet.title;
+                var desc = data.items[x].snippet.description;
+                var thumb = data.items[x].snippet.thumbnails.default.url;
 
+                output.innerHTML += '<div>'+title+'<br>'+desc+'<br>'+thumb+'</div>';
+            }
+        })
     }
 
     function ajaxJS(url, callback) {
